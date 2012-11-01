@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+# Leostick Polyphonic Synth Library.
+# Copyright (C) 2012 Mark Jessop <mark.jessop@adelaide.edu.au>
+#
+# Handles comms to 3 Leosticks, running the Leostick_synth code, supplied in this repo.
+# TODO: Make it work with an arbitary number of Leosticks.
 
 import serial
 

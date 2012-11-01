@@ -1,4 +1,12 @@
+# Leostick Polyphonic Synth controller
+# Copyright (C) 2012 Mark Jessop <mark.jessop@adelaide.edu.au>
+# 
+# This is a quick hack of the rtmidi example code, to send the midi events
+# to the Annoyance class, which controls the Leosticks.
+
 import math
+import rtmidi
+from Annoyance import Annoyance
 
 def print_message(midi):
     if midi.isNoteOn():
@@ -9,15 +17,18 @@ def print_message(midi):
         print 'CONTROLLER', midi.getControllerNumber(), midi.getControllerValue()
 
 
-import rtmidi
-from Annoyance import Annoyance
+
 midiin = rtmidi.RtMidiIn()
+
+# Change this to suit.
 annoy = Annoyance(['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2'])
+
+midiport = 2 # This is the USB MIDI controller on my machine.
 
 ports = range(midiin.getPortCount())
 if ports:
-    print midiin.getPortName(2)
-    midiin.openPort(2)
+    print midiin.getPortName(midiport)
+    midiin.openPort(midiport)
     while True:
         m = midiin.getMessage(50) # some timeout in ms
         if m != None:
